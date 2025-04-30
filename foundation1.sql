@@ -14,4 +14,16 @@ SELECT
 FROM PatientStay ps
 WHERE ps.Hospital IN ('PRUH', 'Oxleas')
 AND ps.Ward LIKE '%Surgery'
-AND ps.AdmittedDate BETWEEN '2024-02-27' AND '2024-03-01'
+-- AND ps.AdmittedDate BETWEEN '2024-02-27' AND '2024-03-01'
+ORDER BY ps.AdmittedDate DESC, ps.PatientId DESC
+
+SELECT
+    ps.Hospital
+    , ps.Ward
+    , COUNT(*) as NumberOfPatients
+    , SUM(ps.Tariff) as TotalTariff
+    , AVG(ps.Tariff) as AverageTariff
+    , MAX(ps.Tariff) as HighestTariff
+    , MIN(ps.Tariff) as LowestTariff
+FROM PatientStay ps
+GROUP BY ps.Hospital , ps.Ward
