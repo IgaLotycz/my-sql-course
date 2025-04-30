@@ -27,3 +27,15 @@ SELECT
     , MIN(ps.Tariff) as LowestTariff
 FROM PatientStay ps
 GROUP BY ps.Hospital , ps.Ward
+ORDER BY NumberOfPatients DESC
+
+
+SELECT
+    ps.PatientId
+    ,ps.AdmittedDate
+    ,ps.Hospital
+    ,dh.HospitalType
+    ,dh.HospitalSize
+FROM
+    PatientStay ps LEFT JOIN DimHospitalBad dh ON ps.Hospital = dh.Hospital
+WHERE dh.HospitalType IS NULL
